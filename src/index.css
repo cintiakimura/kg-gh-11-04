@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #00c600;
+  --color-dark: #121212;
+}
+
+@layer base {
+  body {
+    @apply bg-dark text-white font-sans antialiased;
+    background-color: #121212;
+  }
+  
+  /* Remove bold texts as per request */
+  b, strong, .font-bold, .font-semibold {
+    @apply font-normal;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-black/40 backdrop-blur-md border border-white/10 rounded-lg;
+  }
+  
+  .btn-primary {
+    @apply bg-brand hover:bg-brand/80 text-black px-4 py-2 rounded transition-colors uppercase text-sm tracking-wider;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded transition-colors uppercase text-sm tracking-wider;
+  }
+
+  .input-field {
+    @apply bg-black/60 border border-white/10 rounded px-3 py-2 text-white focus:border-brand outline-none transition-colors w-full;
+  }
+
+  .label-text {
+    @apply text-xs uppercase tracking-widest text-white/50 mb-1 block;
+  }
+}
