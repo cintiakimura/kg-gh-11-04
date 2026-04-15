@@ -42,13 +42,9 @@ export default function App() {
   const renderHeader = () => (
     <header className="flex justify-between items-center p-6 border-b border-white/5">
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand">
-            <path d="M10 10V90H25V55L45 90H62L38 48L60 10H43L25 42V10H10Z" fill="currentColor"/>
-            <path d="M90 50C90 72.0914 72.0914 90 50 90C38.9543 90 28.9543 85.5228 21.7157 78.2843L32.3223 67.6777C36.8452 72.2005 43.0952 75 50 75C63.8071 75 75 63.8071 75 50C75 36.1929 63.8071 25 50 25C43.0952 25 36.8452 27.7995 32.3223 32.3223L21.7157 21.7157C28.9543 14.4772 38.9543 10 50 10C72.0914 10 90 27.9086 90 50Z" fill="currentColor"/>
-            <path d="M50 42V58H82V42H50Z" fill="currentColor"/>
-          </svg>
-          <span className="text-lg tracking-[0.3em] uppercase text-white/90 font-light">ProTech</span>
+        <div className="flex items-center gap-3">
+          <span className="text-2xl font-bold text-brand tracking-tighter">KG</span>
+          <span className="text-lg tracking-[0.2em] uppercase text-white/90 font-light hidden sm:block">ProTech</span>
         </div>
         <div className="h-4 w-[1px] bg-white/10 mx-2" />
         <nav className="flex gap-6">
@@ -119,13 +115,15 @@ export default function App() {
               </div>
             </Panel>
             <Panel title="Vehicle Specs">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-0">
-                <Input label="Brand" defaultValue={selectedVehicle?.brand} />
-                <Input label="Model" defaultValue={selectedVehicle?.model} />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2">
+                <Input label="Brand and Model" defaultValue={selectedVehicle?.brand + ' ' + selectedVehicle?.model} />
+                <Input label="Version and Year" defaultValue={selectedVehicle?.year} />
                 <Input label="VIN" defaultValue={selectedVehicle?.vin} />
-                <Input label="Year" defaultValue={selectedVehicle?.year} />
-                <Input label="Fuel" defaultValue={selectedVehicle?.fuel} />
-                <Input label="Engine Details" defaultValue={selectedVehicle?.engineDetails} />
+                <Input label="Engine Type/Size" defaultValue={selectedVehicle?.engineType} />
+                <Input label="Power and Fuel" defaultValue={selectedVehicle?.enginePower + ' / ' + selectedVehicle?.fuel} />
+                <Input label="Engine Code" defaultValue={selectedVehicle?.engineCode} />
+                <Input label="Transmission Type" defaultValue={selectedVehicle?.transmissionType} />
+                <Input label="Number of Gears" defaultValue={selectedVehicle?.transmissionGears} />
               </div>
               <div className="flex gap-2 mt-4">
                 <Button className="flex-1"><Save size={14} className="mr-2" /> Save</Button>
@@ -149,8 +147,9 @@ export default function App() {
               </div>
               <div className="w-full md:w-64 space-y-2">
                 <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2">Documentation</p>
-                <Button variant="secondary" className="w-full text-[10px] justify-start"><FileText size={14} className="mr-2"/> Wiring Diagram</Button>
-                <Button variant="secondary" className="w-full text-[10px] justify-start"><FileText size={14} className="mr-2"/> Pinning List</Button>
+                <Button variant="secondary" className="w-full text-[10px] justify-start"><FileText size={14} className="mr-2"/> Wiring Diagrams</Button>
+                <Button variant="secondary" className="w-full text-[10px] justify-start"><FileText size={14} className="mr-2"/> Pinning Lists</Button>
+                <Button variant="secondary" className="w-full text-[10px] justify-start"><ImageIcon size={14} className="mr-2"/> ECU Labels</Button>
                 <div className="pt-4">
                   <Button className="w-full">Save Changes</Button>
                 </div>
@@ -202,42 +201,49 @@ export default function App() {
 
           {/* Row 2: Connector Editing Panels */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Panel title="Connector 2">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="grid grid-cols-2 gap-4 flex-1">
+            <Panel title="Connector 1">
+              <div className="flex flex-col gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Female View</p>
-                    <Button variant="secondary" className="text-[10px]">Upload Photo</Button>
+                    <p className="text-[10px] uppercase text-white/40 mb-4">Female Photos (Front/Side)</p>
+                    <Button variant="secondary" className="text-[10px]">Upload</Button>
                   </div>
                   <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Male View</p>
-                    <Button variant="secondary" className="text-[10px]">Upload Photo</Button>
+                    <p className="text-[10px] uppercase text-white/40 mb-4">Male Photos</p>
+                    <Button variant="secondary" className="text-[10px]">Upload</Button>
+                  </div>
+                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
+                    <p className="text-[10px] uppercase text-white/40 mb-4">Connector Map</p>
+                    <Button variant="secondary" className="text-[10px]">Upload</Button>
                   </div>
                 </div>
-                <div className="w-full md:w-48 space-y-2">
-                  <Button variant="secondary" className="w-full text-[10px]">+ Wiring Diagram</Button>
-                  <Button variant="secondary" className="w-full text-[10px]">+ Pinning List</Button>
-                  <Button className="w-full mt-4">Save</Button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <p className="text-[10px] uppercase tracking-widest text-white/40">Documentation</p>
+                    <Button variant="secondary" className="w-full text-[10px] justify-start"><FileText size={14} className="mr-2"/> + Wiring Diagrams</Button>
+                    <Button variant="secondary" className="w-full text-[10px] justify-start"><FileText size={14} className="mr-2"/> + Pinning Lists</Button>
+                    <Button variant="secondary" className="w-full text-[10px] justify-start"><ImageIcon size={14} className="mr-2"/> + ECU Labels</Button>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-[10px] uppercase tracking-widest text-white/40">Map Generator</p>
+                    <Input label="Car/Minifit/Sub-DB Pins" placeholder="Enter pins" />
+                    <Input label="Twisting and Shielding" placeholder="Specify" />
+                    <Input label="Wire Diameter" placeholder="e.g. 0.5mm" />
+                    <Button className="w-full mt-2">Generate Map</Button>
+                  </div>
                 </div>
+                <Button className="w-full">Save Connector 1</Button>
               </div>
             </Panel>
-            <Panel title="Connector 1">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="grid grid-cols-2 gap-4 flex-1">
+            <Panel title="Connector 2">
+              <div className="flex flex-col gap-6 opacity-50">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Female View</p>
-                    <Button variant="secondary" className="text-[10px]">Edit Photo</Button>
-                  </div>
-                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Male View</p>
-                    <Button variant="secondary" className="text-[10px]">Edit Photo</Button>
+                    <p className="text-[10px] uppercase text-white/40 mb-4">Visual Assets</p>
+                    <Button variant="secondary" className="text-[10px]">Upload</Button>
                   </div>
                 </div>
-                <div className="w-full md:w-48 space-y-2">
-                  <Button variant="secondary" className="w-full text-[10px]">+ Wiring Diagram</Button>
-                  <Button variant="secondary" className="w-full text-[10px]">+ Pinning List</Button>
-                  <Button className="w-full mt-4">Save</Button>
-                </div>
+                <Button className="w-full" disabled>Locked</Button>
               </div>
             </Panel>
           </div>
@@ -348,7 +354,9 @@ export default function App() {
                     <thead>
                       <tr className="border-b border-white/10 text-white/40">
                         <th className="pb-2 font-normal uppercase tracking-widest text-[10px]">Supplier</th>
+                        <th className="pb-2 font-normal uppercase tracking-widest text-[10px]">Lead Time</th>
                         <th className="pb-2 font-normal uppercase tracking-widest text-[10px]">Price</th>
+                        <th className="pb-2 font-normal uppercase tracking-widest text-[10px]">PDF</th>
                         <th className="pb-2 font-normal uppercase tracking-widest text-[10px]">Action</th>
                       </tr>
                     </thead>
@@ -356,7 +364,9 @@ export default function App() {
                       {SAMPLE_SUPPLIERS.map(s => (
                         <tr key={s.id} className="group hover:bg-white/2">
                           <td className="py-2">{s.name}</td>
+                          <td className="py-2">60 Days</td>
                           <td className="py-2">€2,500</td>
+                          <td className="py-2"><FileText size={14} className="text-white/40 group-hover:text-brand cursor-pointer" /></td>
                           <td className="py-2">
                             <Button variant="secondary" className="text-[8px] py-1 px-2">Request</Button>
                           </td>
@@ -583,14 +593,20 @@ export default function App() {
                   </div>
                 </div>
                 <div className="flex-1 space-y-4 border-t md:border-t-0 md:border-l border-white/5 pt-4 md:pt-0 md:pl-6">
-                  <p className="text-[10px] uppercase tracking-widest text-white/40">Shipping Timeline</p>
+                  <div className="flex justify-between items-center mb-2">
+                    <p className="text-[10px] uppercase tracking-widest text-white/40">Shipping Timeline</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] uppercase text-white/40">Confirmed Status</span>
+                      <div className="w-4 h-4 rounded-full bg-brand border border-brand/20" />
+                    </div>
+                  </div>
                   <div className="grid grid-cols-3 gap-2">
                     <div className="p-2 bg-white/5 rounded text-center">
                       <p className="text-[8px] text-white/40 uppercase mb-1">Initial</p>
                       <p className="text-[10px]">06-05</p>
                     </div>
                     <div className="p-2 bg-brand/10 rounded text-center border border-brand/20">
-                      <p className="text-[8px] text-brand uppercase mb-1">Current</p>
+                      <p className="text-[8px] text-brand uppercase mb-1">Expected</p>
                       <p className="text-[10px]">06-10</p>
                     </div>
                     <div className="p-2 bg-white/5 rounded text-center">
@@ -651,12 +667,24 @@ export default function App() {
                       <Select label="Currency" options={[{value: 'eur', label: 'EUR (€)'}, {value: 'usd', label: 'USD ($)'}]} />
                     </div>
                     <Input label="Lead Time (Days)" type="number" placeholder="60" />
+                    <div className="p-4 border border-dashed border-white/10 rounded text-center bg-black/20">
+                      <FileText size={24} className="mx-auto mb-2 text-white/20" />
+                      <p className="text-[10px] uppercase tracking-widest text-white/40">Upload Quotation PDF</p>
+                      <Button variant="secondary" className="mt-2 text-[10px]">Select File</Button>
+                    </div>
                     <Button className="w-full mt-4" onClick={() => setCurrentPage(8)}>Send Quotation <ArrowRight size={14} className="ml-2"/></Button>
                   </div>
-                  <div className="p-6 border border-dashed border-white/10 rounded text-center bg-black/20 flex flex-col justify-center">
-                    <ImageIcon size={32} className="mx-auto mb-4 text-white/20" />
-                    <p className="text-[10px] uppercase tracking-widest text-white/40">Upload Quotation PDF</p>
-                    <Button variant="secondary" className="mt-4 text-[10px]">Select File</Button>
+                  <div className="space-y-4">
+                    <p className="text-[10px] uppercase tracking-widest text-white/40">Connector Assets</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="aspect-video bg-black/40 rounded border border-white/5 flex items-center justify-center"><ImageIcon size={20} className="text-white/20"/></div>
+                      <div className="aspect-video bg-black/40 rounded border border-white/5 flex items-center justify-center"><ImageIcon size={20} className="text-white/20"/></div>
+                    </div>
+                    <div className="space-y-1">
+                      <Button variant="secondary" className="w-full text-[10px] justify-start"><Download size={12} className="mr-2"/> Wiring Diagram</Button>
+                      <Button variant="secondary" className="w-full text-[10px] justify-start"><Download size={12} className="mr-2"/> Pinning List</Button>
+                      <Button variant="secondary" className="w-full text-[10px] justify-start"><Download size={12} className="mr-2"/> ECU Label</Button>
+                    </div>
                   </div>
                 </div>
               </Panel>
@@ -711,10 +739,10 @@ export default function App() {
               </Panel>
             </div>
             <div className="lg:col-span-8">
-              <Panel title="Order Detail: Connector 2">
+              <Panel title="Order Detail: Connector 1">
                 <div className="flex flex-col md:flex-row gap-8">
                   <div className="flex-1 space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                       <div className="p-4 bg-white/5 rounded border border-white/10">
                         <p className="text-[10px] text-white/40 uppercase mb-1">Price</p>
                         <p className="text-xl font-mono">€2,500</p>
@@ -723,13 +751,26 @@ export default function App() {
                         <p className="text-[10px] text-white/40 uppercase mb-1">Lead Time</p>
                         <p className="text-xl font-mono">60 Days</p>
                       </div>
-                    </div>
-                    <div className="p-4 bg-brand/5 border border-brand/20 rounded flex items-center justify-between">
-                      <div>
-                        <p className="text-[10px] uppercase tracking-widest text-brand">Expected Shipping</p>
-                        <p className="text-lg">2026-06-05</p>
+                      <div className="p-4 bg-white/5 rounded border border-white/10 flex flex-col justify-center items-center">
+                        <p className="text-[10px] text-white/40 uppercase mb-1">Confirmed</p>
+                        <div className="w-4 h-4 rounded-full bg-brand border border-brand/20" />
                       </div>
-                      <Clock size={24} className="text-brand/40" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="p-4 bg-white/5 border border-white/10 rounded flex items-center justify-between">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-white/40">Initial Shipping</p>
+                          <p className="text-lg">2026-06-05</p>
+                        </div>
+                        <Clock size={24} className="text-white/10" />
+                      </div>
+                      <div className="p-4 bg-brand/5 border border-brand/20 rounded flex items-center justify-between">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-brand">Expected Shipping</p>
+                          <p className="text-lg">2026-06-10</p>
+                        </div>
+                        <Clock size={24} className="text-brand/40" />
+                      </div>
                     </div>
                   </div>
                   <div className="w-full md:w-64 flex flex-col gap-2 justify-center">

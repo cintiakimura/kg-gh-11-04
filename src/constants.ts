@@ -8,9 +8,48 @@ export const SAMPLE_CLIENTS: Client[] = [
 ];
 
 export const SAMPLE_VEHICLES: Vehicle[] = [
-  { id: 'v1', brand: 'Lincoln', model: 'Navigator 3rd gen Ecoboost', vin: '1LN...5678', year: '2015', fuel: 'Gasoline', engineDetails: '3.5L V6 Ecoboost', system: 'ABS' },
-  { id: 'v2', brand: 'Nissan', model: 'Qashqai J11', vin: 'SJN...1234', year: '2018', fuel: 'Diesel', engineDetails: '1.6 dCi', system: 'Engine Management' },
-  { id: 'v3', brand: 'Renault', model: 'Captur II', vin: 'VF1...9012', year: '2022', fuel: 'Diesel', engineDetails: '1.5 Blue dCi', system: 'ABS' },
+  { 
+    id: 'v1', 
+    brand: 'Lincoln', 
+    model: 'Navigator 3rd gen Ecoboost', 
+    vin: '1LN...5678', 
+    year: '2015', 
+    fuel: 'Gasoline', 
+    engineType: '3.5L V6',
+    enginePower: '380 HP',
+    engineCode: 'EcoBoost',
+    transmissionType: 'Automatic',
+    transmissionGears: '6',
+    system: 'ABS' 
+  },
+  { 
+    id: 'v2', 
+    brand: 'Nissan', 
+    model: 'Qashqai J11', 
+    vin: 'SJN...1234', 
+    year: '2018', 
+    fuel: 'Diesel', 
+    engineType: '1.6 dCi',
+    enginePower: '130 HP',
+    engineCode: 'R9M',
+    transmissionType: 'Manual',
+    transmissionGears: '6',
+    system: 'Engine Management' 
+  },
+  { 
+    id: 'v3', 
+    brand: 'Renault', 
+    model: 'Captur II', 
+    vin: 'VF1...9012', 
+    year: '2022', 
+    fuel: 'Diesel', 
+    engineType: '1.5 Blue dCi',
+    enginePower: '115 HP',
+    engineCode: 'K9K',
+    transmissionType: 'EDC',
+    transmissionGears: '7',
+    system: 'ABS' 
+  },
 ];
 
 export const SAMPLE_CONNECTORS: Connector[] = [
@@ -19,7 +58,16 @@ export const SAMPLE_CONNECTORS: Connector[] = [
     vehicleId: 'v1', 
     name: 'Connector 1', 
     photos: {}, 
-    documentation: {},
+    documentation: {
+      wiringDiagram: 'WD-001.pdf',
+      pinningList: 'PL-001.xlsx',
+      ecuLabel: 'ECU-L-001.jpg'
+    },
+    mapGenerator: {
+      pins: 'Car/Minifit/Sub-DB',
+      twisting: 'Twisting and Shielding',
+      wireDiameter: '0.5mm'
+    },
     status: 'TO QUOTE',
     supplierId: 's1'
   },
@@ -38,6 +86,7 @@ export const SAMPLE_SUPPLIERS: Supplier[] = [
   { id: 's1', name: 'Breakoutbox', contactName: 'John Smith', email: 'sales@breakoutbox.com', phone: '+44 20 1234 5678', address: 'London, UK' },
   { id: 's2', name: 'OR Technocabos', contactName: 'Maria Silva', email: 'info@technocabos.pt', phone: '+351 21 000 0000', address: 'Lisbon, Portugal' },
   { id: 's3', name: 'Cloom Tech', contactName: 'Li Wei', email: 'contact@cloom.com', phone: '+86 10 8888 8888', address: 'Beijing, China' },
+  { id: 's4', name: 'Add Solutions', contactName: 'Sarah Jones', email: 'info@addsolutions.de', phone: '+49 89 123456', address: 'Munich, Germany' },
 ];
 
 export const SAMPLE_QUOTATIONS: Quotation[] = [

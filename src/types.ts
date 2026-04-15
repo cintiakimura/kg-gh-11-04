@@ -9,7 +9,11 @@ export interface Vehicle {
   vin: string;
   year: string;
   fuel: string;
-  engineDetails: string;
+  engineType: string;
+  enginePower: string;
+  engineCode: string;
+  transmissionType: string;
+  transmissionGears: string;
   system: string;
 }
 
@@ -27,6 +31,12 @@ export interface Connector {
   documentation: {
     wiringDiagram?: string;
     pinningList?: string;
+    ecuLabel?: string;
+  };
+  mapGenerator?: {
+    pins?: string;
+    twisting?: string;
+    wireDiameter?: string;
   };
   status?: string;
   supplierId?: string;
@@ -74,4 +84,5 @@ export interface Order {
   shippingDateInitial?: string;
   shippingDateCurrent?: string;
   shippingDateActual?: string;
+  confirmedStatus?: boolean;
 }
