@@ -84,7 +84,10 @@ export default function App() {
             <Panel title="Organization">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-0">
                 <Input label="Company Name" placeholder="Organization Name" />
-                <Select label="Country" options={[{value: 'us', label: 'United States'}, {value: 'fr', label: 'France'}]} />
+                <div className="grid grid-cols-2 gap-2">
+                  <Select label="Country" options={[{value: 'us', label: 'United States'}, {value: 'fr', label: 'France'}, {value: 'pt', label: 'Portugal'}]} />
+                  <Select label="Province" options={[{value: 'lisbon', label: 'Lisbon'}, {value: 'porto', label: 'Porto'}]} />
+                </div>
                 <Input label="Street" />
                 <Input label="Email" />
                 <Input label="Phone" />
@@ -133,16 +136,27 @@ export default function App() {
           </div>
 
           {/* Row 3: Detailed View */}
-          <Panel title="Details: Renault Captur II">
+          <Panel title={`Details: ${selectedVehicle?.brand} ${selectedVehicle?.model}`}>
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 p-4 bg-white/5 rounded border border-white/10">
-                <p className="text-[10px] uppercase tracking-widest text-brand mb-4">ABS System</p>
+                <p className="text-[10px] uppercase tracking-widest text-brand mb-4">ABS System - Connector 1 Photos</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="aspect-video bg-black/40 rounded flex items-center justify-center border border-white/5">
-                      <ImageIcon size={24} className="text-white/20" />
-                    </div>
-                  ))}
+                  <div className="aspect-video bg-black/40 rounded flex flex-col items-center justify-center border border-white/5 p-2">
+                    <ImageIcon size={20} className="text-white/20 mb-1" />
+                    <span className="text-[8px] uppercase text-white/40">Female Front</span>
+                  </div>
+                  <div className="aspect-video bg-black/40 rounded flex flex-col items-center justify-center border border-white/5 p-2">
+                    <ImageIcon size={20} className="text-white/20 mb-1" />
+                    <span className="text-[8px] uppercase text-white/40">Female Side</span>
+                  </div>
+                  <div className="aspect-video bg-black/40 rounded flex flex-col items-center justify-center border border-white/5 p-2">
+                    <ImageIcon size={20} className="text-white/20 mb-1" />
+                    <span className="text-[8px] uppercase text-white/40">Male Front</span>
+                  </div>
+                  <div className="aspect-video bg-black/40 rounded flex flex-col items-center justify-center border border-white/5 p-2">
+                    <ImageIcon size={20} className="text-white/20 mb-1" />
+                    <span className="text-[8px] uppercase text-white/40">ECU Label</span>
+                  </div>
                 </div>
               </div>
               <div className="w-full md:w-64 space-y-2">
@@ -203,18 +217,22 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Panel title="Connector 1">
               <div className="flex flex-col gap-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Female Photos (Front/Side)</p>
-                    <Button variant="secondary" className="text-[10px]">Upload</Button>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-2 text-center">
+                    <p className="text-[8px] uppercase text-white/40 mb-2">Female Front/Side</p>
+                    <Button variant="secondary" className="text-[8px] h-6">Upload</Button>
                   </div>
-                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Male Photos</p>
-                    <Button variant="secondary" className="text-[10px]">Upload</Button>
+                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-2 text-center">
+                    <p className="text-[8px] uppercase text-white/40 mb-2">Male Front/Side</p>
+                    <Button variant="secondary" className="text-[8px] h-6">Upload</Button>
                   </div>
-                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-4 text-center">
-                    <p className="text-[10px] uppercase text-white/40 mb-4">Connector Map</p>
-                    <Button variant="secondary" className="text-[10px]">Upload</Button>
+                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-2 text-center">
+                    <p className="text-[8px] uppercase text-white/40 mb-2">ECU Label</p>
+                    <Button variant="secondary" className="text-[8px] h-6">Upload</Button>
+                  </div>
+                  <div className="aspect-square bg-black/40 rounded border border-white/5 flex flex-col items-center justify-center p-2 text-center">
+                    <p className="text-[8px] uppercase text-white/40 mb-2">Connector Map</p>
+                    <Button variant="secondary" className="text-[8px] h-6">Upload</Button>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
